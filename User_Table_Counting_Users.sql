@@ -118,39 +118,39 @@ SELECT
   COALESCE(Merged.MergedUsers,0) AS MergedUsers,
   New.New_Added_Users-COALESCE(DeletedUsers,0)-COALESCE(MergedUSers,0) AS NetUsers
 FROM
-    (SELECT 
-      DATE(created_at)    AS Day,
-      COUNT(*)            AS New_Added_Users
-    FROM 
-      dsv1069.users
-    GROUP BY 
-      Day ) AS New
-  LEFT JOIN 
-    (SELECT 
-      DATE(deleted_at)    AS Day,
-      COUNT(*)            AS DeletedUsers
-    FROM 
-      dsv1069.users
-    WHERE
-      deleted_at IS NOT NULL
-    GROUP BY  
-      Day) AS Deleted
-  ON 
-    New.Day = Deleted.Day
-  LEFT JOIN 
-    (SELECT 
-      DATE(merged_at)   AS Day,
-      COUNT(*)          AS MergedUsers
-    FROM 
-      dsv1069.users
-    WHERE
-      id <> parent_user_id 
-    AND 
-      parent_user_id IS NOT NULL
-    GROUP BY  
-      Day) AS Merged  
-  ON
-    New.Day = Merged.Day
+  (SELECT 
+    DATE(created_at)    AS Day,
+    COUNT(*)            AS New_Added_Users
+  FROM 
+    dsv1069.users
+  GROUP BY 
+    Day ) AS New
+LEFT JOIN 
+  (SELECT 
+    DATE(deleted_at)    AS Day,
+    COUNT(*)            AS DeletedUsers
+  FROM 
+    dsv1069.users
+  WHERE
+    deleted_at IS NOT NULL
+  GROUP BY  
+    Day) AS Deleted
+ON 
+  New.Day = Deleted.Day
+LEFT JOIN 
+  (SELECT 
+    DATE(merged_at)   AS Day,
+    COUNT(*)          AS MergedUsers
+  FROM 
+    dsv1069.users
+  WHERE
+    id <> parent_user_id 
+  AND 
+    parent_user_id IS NOT NULL
+  GROUP BY  
+    Day) AS Merged  
+ON
+  New.Day = Merged.Day
     
     
   
