@@ -52,8 +52,8 @@ GROUP BY
   Day
 --Part2
 SELECT 
-  DATE(merged_at)        AS Day,
-  COUNT(*)      AS MergedUsers
+  DATE(merged_at)   AS Day,
+  COUNT(*)          AS MergedUsers
 FROM 
   dsv1069.users
 WHERE
@@ -112,8 +112,8 @@ ON
 SELECT 
   New.Day,
   New.New_Added_Users,
-  COALESCE(Deleted.DeletedUsers,0) AS DeletedUsers,
-  COALESCE(Merged.MergedUsers,0) AS MergedUsers,
+  COALESCE(Deleted.DeletedUsers,0)                                     AS DeletedUsers,
+  COALESCE(Merged.MergedUsers,0)                                       AS MergedUsers,
   New.New_Added_Users-COALESCE(DeletedUsers,0)-COALESCE(MergedUSers,0) AS NetUsers
 FROM
   (SELECT 
@@ -156,9 +156,9 @@ ON
 --Does the previous query still work? No, it doesn’t. Use the dates_rollup as a backbone for this query, so that we won’t miss any dates.
 SELECT 
   Date,
-  COALESCE(New.New_Added_Users,0) AS New_Added_Users,
-  COALESCE(Deleted.DeletedUsers,0) AS DeletedUsers,
-  COALESCE(Merged.MergedUsers,0) AS MergedUsers,
+  COALESCE(New.New_Added_Users,0)                                              AS New_Added_Users,
+  COALESCE(Deleted.DeletedUsers,0)                                             AS DeletedUsers,
+  COALESCE(Merged.MergedUsers,0)                                               AS MergedUsers,
   COALESCE(New_Added_Users,0)-COALESCE(DeletedUsers,0)-COALESCE(MergedUSers,0) AS NetUsers
 FROM 
   dsv1069.dates_rollup
