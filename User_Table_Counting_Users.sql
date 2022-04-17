@@ -52,16 +52,16 @@ GROUP BY
   Day
 --Part2
 SELECT 
-    DATE(merged_at)        AS Day,
-    COUNT(*)               AS MergedUsers
-  FROM 
-    dsv1069.users
-  WHERE
-    id <> parent_user_id 
-  AND 
-    parent_user_id IS NOT NULL
-  GROUP BY  
-    Day
+  DATE(merged_at)        AS Day,
+  COUNT(*)      AS MergedUsers
+FROM 
+  dsv1069.users
+WHERE
+  id <> parent_user_id 
+AND 
+  parent_user_id IS NOT NULL
+GROUP BY  
+  Day
 
 
 --Exercise 5: Use the pieces you’ve built as subtables and create a table that has a column for the date, the number of users created, the number of users deleted and the number of users
@@ -69,44 +69,42 @@ SELECT
 SELECT 
   New.Day,
   New.New_Added_Users,
-  Deleted.DeletedUsers,
-  Merged.MergedUSers
+  Deleted.DeletedUsrs,
+  Merged.MergedUsers
 FROM
-
-    (SELECT 
-      DATE(created_at)    AS Day,
-      COUNT(*)            AS New_Added_Users
-    FROM 
-      dsv1069.users
-    GROUP BY 
-      Day ) AS New
-  LEFT JOIN 
-    (SELECT 
-      DATE(deleted_at)    AS Day,
-      COUNT(*)            AS DeletedUsers
-    FROM 
-      dsv1069.users
-    WHERE
-      deleted_at IS NOT NULL
-    GROUP BY  
-      Day) AS Deleted
-  ON 
-    New.Day = Deleted.Day
-  LEFT JOIN 
-    (SELECT 
-      DATE(merged_at)     AS Day,
-      COUNT(*)            AS MergedUsers
-    FROM 
-      dsv1069.users
-    WHERE
-      id <> parent_user_id 
-    AND 
-      parent_user_id IS NOT NULL
-    GROUP BY  
-      Day) AS Merged  
-  ON
-    New.Day = Merged.Day
-    
+  (SELECT 
+    DATE(created_at)    AS Day,
+    COUNT(*)            AS New_Added_Users
+  FROM 
+    dsv1069.users
+  GROUP BY 
+    Day ) AS New
+LEFT JOIN 
+  (SELECT 
+    DATE(deleted_at)    AS Day,
+    COUNT(*)            AS DeletedUsers
+  FROM 
+    dsv1069.users
+  WHERE
+    deleted_at IS NOT NULL
+  GROUP BY  
+    Day) AS Deleted
+ON 
+  New.Day = Deleted.Day
+LEFT JOIN 
+  (SELECT 
+    DATE(merged_at)   AS Day,
+    COUNT(*)          AS MergedUsers
+  FROM 
+    dsv1069.users
+  WHERE
+    id <> parent_user_id 
+  AND 
+    parent_user_id IS NOT NULL
+  GROUP BY  
+    Day) AS Merged  
+ON
+  New.Day = Merged.Day
  
 
 -- Exercise 6: Refine your query from #5 to have informative column names and so that null columns return 0.
