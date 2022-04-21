@@ -15,11 +15,10 @@ SELECT
   *
 FROM
   (SELECT 
-    view_item_events.user_id AS user_id ,
-    view_item_events.item_id AS item_id,
+    view_item_events.user_id                                     AS user_id ,
+    view_item_events.item_id                                     AS item_id,
     event_time,
-    RANK() OVER (PARTITION BY user_id ORDER BY event_time DESC ) AS VIEW_RANK
-    
+    RANK() OVER (PARTITION BY user_id ORDER BY event_time DESC ) AS VIEW_RANK   
   FROM 
     dsv1069.view_item_events) AS recent_views
 JOIN
@@ -47,11 +46,10 @@ SELECT
   dsv1069.items.category              AS item_category
 FROM
   (SELECT 
-    view_item_events.user_id AS user_id ,
-    view_item_events.item_id AS item_id,
+    view_item_events.user_id                                      AS user_id ,
+    view_item_events.item_id                                      AS item_id,
     event_time,
-    RANK() OVER (PARTITION BY user_id ORDER BY event_time DESC ) AS VIEW_RANK
-    
+    RANK() OVER (PARTITION BY user_id ORDER BY event_time DESC )  AS VIEW_RANK    
   FROM 
     dsv1069.view_item_events) AS recent_views
 JOIN
@@ -79,10 +77,10 @@ SELECT
   dsv1069.items.category                                          AS item_category
 FROM
   (SELECT 
-    view_item_events.user_id AS user_id ,
-    view_item_events.item_id AS item_id,
+    view_item_events.user_id                                      AS user_id ,
+    view_item_events.item_id                                      AS item_id,
     event_time,
-    RANK() OVER (PARTITION BY user_id ORDER BY event_time DESC ) AS VIEW_RANK
+    RANK() OVER (PARTITION BY user_id ORDER BY event_time DESC )  AS VIEW_RANK
   FROM 
     dsv1069.view_item_events) AS recent_views
 JOIN
