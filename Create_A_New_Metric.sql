@@ -5,17 +5,17 @@ SELECT
   Test_Event.test_id,
   Test_Event.assignment,
   Test_Event.user_id,
-  MAX(CASE WHEN dsv1069.orders.paid_at IS NOT NULL THEN 1 ELSE 0 END) AS Order_Binary
+  MAX(CASE WHEN 
+        dsv1069.orders.paid_at IS NOT NULL THEN 1 
+      ELSE 0 END) AS Order_Binary
 FROM
   (SELECT 
     event_id, 
     event_time,
     user_id,
-    MAX(CASE WHEN parameter_name = 'test_id'
-        THEN CAST(parameter_value AS INT) 
+    MAX(CASE WHEN parameter_name = 'test_id'THEN CAST(parameter_value AS INT) 
         ELSE NULL END ) AS test_id,
-    MAX(CASE WHEN parameter_name = 'test_assignment'
-        THEN parameter_value
+    MAX(CASE WHEN parameter_name = 'test_assignment' THEN parameter_value
         ELSE NULL END ) AS assignment
   FROM
     dsv1069.events
@@ -52,11 +52,9 @@ FROM
     event_id, 
     event_time,
     user_id,
-    MAX(CASE WHEN parameter_name = 'test_id'
-        THEN CAST(parameter_value AS INT) 
+    MAX(CASE WHEN parameter_name = 'test_id'THEN CAST(parameter_value AS INT) 
         ELSE NULL END ) AS test_id,
-    MAX(CASE WHEN parameter_name = 'test_assignment'
-        THEN parameter_value
+    MAX(CASE WHEN parameter_name = 'test_assignment' THEN parameter_value
         ELSE NULL END ) AS assignment
   FROM
     dsv1069.events
