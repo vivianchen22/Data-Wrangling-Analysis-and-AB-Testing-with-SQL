@@ -30,7 +30,7 @@ LEFT JOIN
 ON
   Test_Event.user_id = dsv1069.orders.user_id
 AND 
-  Test_Event.event_time <= dsv1069.orders.paid_at
+  Test_Event.event_time < dsv1069.orders.paid_at
 GROUP BY 
   Test_Event.test_id,
   Test_Event.assignment,
@@ -71,7 +71,7 @@ LEFT JOIN
 ON
   Test_Event.user_id = dsv1069.orders.user_id
 AND 
-  Test_Event.event_time <= dsv1069.orders.paid_at
+  Test_Event.event_time < dsv1069.orders.paid_at
 GROUP BY 
   Test_Event.test_id,
   Test_Event.assignment,
