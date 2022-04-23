@@ -9,17 +9,16 @@ FROM
     Test_Event.test_id                                                  AS test_id,
     Test_Event.assignment                                               AS assignment,
     Test_Event.user_id                                                  AS user_id,
-    MAX(CASE WHEN dsv1069.orders.paid_at IS NOT NULL THEN 1 ELSE 0 END) AS Order_Binary
+    MAX(CASE WHEN dsv1069.orders.paid_at IS NOT NULL THEN 1 
+        ELSE 0 END)                                                     AS Order_Binary
   FROM
     (SELECT 
       event_id, 
       event_time,
       user_id,
-      MAX(CASE WHEN parameter_name = 'test_id'
-          THEN CAST(parameter_value AS INT) 
+      MAX(CASE WHEN parameter_name = 'test_id' THEN CAST(parameter_value AS INT) 
           ELSE NULL END ) AS test_id,
-      MAX(CASE WHEN parameter_name = 'test_assignment'
-          THEN parameter_value
+      MAX(CASE WHEN parameter_name = 'test_assignment' THEN parameter_value
           ELSE NULL END ) AS assignment
     FROM
       dsv1069.events
@@ -58,7 +57,8 @@ FROM
     Test_Event.test_id                                                  AS test_id,
     Test_Event.assignment                                               AS assignment,
     Test_Event.user_id                                                  AS user_id,
-    MAX(CASE WHEN View_Event.event_time IS NOT NULL THEN 1 ELSE 0 END)  AS View_Binary
+    MAX(CASE WHEN View_Event.event_time IS NOT NULL 
+        THEN 1 ELSE 0 END)                                              AS View_Binary
   FROM
     (SELECT 
       event_id, 
@@ -107,11 +107,13 @@ SELECT
   SUM(View_Binary_30Days)   AS Total_Views_30Days
 FROM
   (SELECT
-    Test_Event.test_id                                                                                    AS test_id,
-    Test_Event.assignment                                                                                 AS assignment,
-    Test_Event.user_id                                                                                    AS user_id,
-    MAX(CASE WHEN view_event.event_time IS NOT NULL THEN 1 ELSE 0 END)                                    AS View_Binary,
-    MAX(CASE WHEN DATE_PART('day',View_Event.event_time -Test_Event.event_time) <= 30 THEN 1 ELSE 0 END ) AS View_Binary_30Days
+    Test_Event.test_id                                                                          AS test_id,
+    Test_Event.assignment                                                                       AS assignment,
+    Test_Event.user_id                                                                          AS user_id,
+    MAX(CASE WHEN view_event.event_time IS NOT NULL 
+        THEN 1 ELSE 0 END)                                                                      AS View_Binary,
+    MAX(CASE WHEN DATE_PART('day',View_Event.event_time -Test_Event.event_time) <= 30 THEN 1 
+        ELSE 0 END )                                                                            AS View_Binary_30Days
   FROM
     (SELECT 
       event_id, 
@@ -177,11 +179,9 @@ FROM
       event_id, 
       event_time,
       user_id,
-      MAX(CASE WHEN parameter_name = 'test_id'
-          THEN CAST(parameter_value AS INT) 
+      MAX(CASE WHEN parameter_name = 'test_id'THEN CAST(parameter_value AS INT) 
           ELSE NULL END ) AS test_id,
-      MAX(CASE WHEN parameter_name = 'test_assignment'
-          THEN parameter_value
+      MAX(CASE WHEN parameter_name = 'test_assignment'THEN parameter_value
           ELSE NULL END ) AS assignment
     FROM
       dsv1069.events
