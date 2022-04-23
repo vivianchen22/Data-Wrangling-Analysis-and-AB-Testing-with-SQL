@@ -13,7 +13,7 @@ INSERT INTO
 
 SELECT 
   event_id, 
-  TIMESTAMP(event_time) AS event_time,
+  event_time,
   user_id,
   platform,
   MAX(CASE WHEN parameter_name = 'item_id'
