@@ -66,7 +66,6 @@ GROUP BY
 
 
 --Exercise 5: Use the above pieces you’ve built as subtables and create a table that has a column for the date, the number of users created, the number of users deleted and the number of users merged that day.
-
 SELECT 
   New.Day,
   New.New_Added_Users,
@@ -108,8 +107,8 @@ ON
   New.Day = Merged.Day
 ORDER BY New.Day
 
--- Exercise 6: Refine your query from #5 to have informative column names and so that null columns return 0.
 
+-- Exercise 6: Refine your query from #5 to have informative column names and so that null columns return 0.
 SELECT 
   New.Day,
   New.New_Added_Users,
