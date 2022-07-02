@@ -1,5 +1,4 @@
 --Exercise 1: Figure out how many tests we have running right now
-
 SELECT 
   COUNT(DISTINCT parameter_value) AS Tests_Count
 FROM 
@@ -52,6 +51,7 @@ GROUP BY
   
 --Exercise 4: Check for potential assignment problems with test_id 5. 
 --Specifically, make sure users are assigned only one treatment group
+--Answer Note: yes, each user only joined 1 treament group
 SELECT
   user_id,
   COUNT(DISTINCT assignment) AS Assignment_Count
