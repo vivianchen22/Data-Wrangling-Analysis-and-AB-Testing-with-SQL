@@ -7,7 +7,7 @@ SELECT
   user_id,
   platform,
   (CASE WHEN parameter_name = 'item_id'
-      THEN CAST(parameter_value AS TEXT) 
+      THEN CAST(parameter_value AS INT) 
       ELSE NULL END ) AS item_id
 FROM
   dsv1069.events
@@ -26,7 +26,7 @@ SELECT
   user_id,
   platform,
   (CASE WHEN parameter_name = 'item_id'
-      THEN CAST(parameter_value AS TEXT) 
+      THEN CAST(parameter_value AS INT) 
       ELSE NULL END ) AS item_id,
   (CASE WHEN parameter_name = 'referrer'
       THEN parameter_value
@@ -47,7 +47,7 @@ SELECT
   user_id,
   platform,
   MAX(CASE WHEN parameter_name = 'item_id'
-      THEN CAST(parameter_value AS TEXT) 
+      THEN CAST(parameter_value AS INT) 
       ELSE NULL END ) AS item_id,
   MAX(CASE WHEN parameter_name = 'referrer'
       THEN parameter_value
