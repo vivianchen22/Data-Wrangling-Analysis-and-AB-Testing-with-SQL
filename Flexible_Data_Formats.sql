@@ -1,13 +1,13 @@
 --Exercise 1:
 --Goal: Write a query to format the view_item event into a table with the appropriate columns
-
+--Answere Note: due to table design, each view_item events can refer to 2 rows, parameter name = 'item_id' &'referral'. 
 SELECT 
   event_id,
   event_time,
   user_id,
   platform,
   (CASE WHEN parameter_name = 'item_id'
-      THEN CAST(parameter_value AS INT) 
+      THEN CAST(parameter_value AS TEXT) 
       ELSE NULL END ) AS item_id
 FROM
   dsv1069.events
@@ -20,14 +20,13 @@ ORDER BY
 --Exercise 2:
 --Goal: Write a query to format the view_item event into a table with the appropriate columns
 --(This replicates what we had in the slides, but it is missing a column)
-
 SELECT 
   event_id,
   event_time,
   user_id,
   platform,
   (CASE WHEN parameter_name = 'item_id'
-      THEN CAST(parameter_value AS INT) 
+      THEN CAST(parameter_value AS TEXT) 
       ELSE NULL END ) AS item_id,
   (CASE WHEN parameter_name = 'referrer'
       THEN parameter_value
@@ -42,14 +41,13 @@ ORDER BY
 
 --Exercise 3:
 --Goal: Use the result from the previous exercise, but make sure
-
 SELECT 
   event_id,
   event_time,
   user_id,
   platform,
   MAX(CASE WHEN parameter_name = 'item_id'
-      THEN CAST(parameter_value AS INT) 
+      THEN CAST(parameter_value AS TEXT) 
       ELSE NULL END ) AS item_id,
   MAX(CASE WHEN parameter_name = 'referrer'
       THEN parameter_value
