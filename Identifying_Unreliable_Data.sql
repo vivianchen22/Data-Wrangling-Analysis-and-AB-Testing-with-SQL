@@ -61,8 +61,7 @@ FROM
 --  dsv1069.users
 --ON 
 --  orders.user_id = users.parent_user_id
-
----Answer Note: no. not every users has parent_user_id. 
+---Answer Note: no. not every users has parent_user_id. would be better if use COALENSE()function. 
 SELECT 
   COUNT(*)
 FROM
