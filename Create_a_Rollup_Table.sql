@@ -1,5 +1,5 @@
 --Exercise 1: Create a subtable of orders per day. Make sure you decide whether you are counting invoices or line items.
-
+--Answer Note: decided to count order by unique invoice_id.
 SELECT 
   DATE(paid_at)                 AS Day,
   COUNT(DISTINCT invoice_id)    AS Orders,
@@ -58,7 +58,7 @@ GROUP BY
  
 --Exercise 4: Weekly Rollup. Figure out which parts of the JOIN condition need to be edited create 7 day rolling orders table.
 --Starter Code: Result from EX2
-
+--Answer Note: needed to join on the condition that dsv1069.dates_rollup.d7_ago < Daily_orders.Day <= d7_ago.Date 
 SELECT
   *
 FROM
@@ -80,8 +80,6 @@ AND
 
 -- Exercise 5: Column Cleanup. Finish creating the weekly rolling orders table, 
 --by performing any aggregation steps and naming your columns appropriately.
-
-
 SELECT
   dsv1069.dates_rollup.date             AS Day,
   COALESCE(SUM(Orders),0)               AS Orders,
